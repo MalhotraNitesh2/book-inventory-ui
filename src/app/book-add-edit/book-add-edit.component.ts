@@ -2,12 +2,12 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CoreService } from '../core/core.service';
-import { EmployeeService } from '../services/employee.service';
+import { EmployeeService } from '../services/Book.service';
 
 @Component({
-  selector: 'app-emp-add-edit',
-  templateUrl: './emp-add-edit.component.html',
-  styleUrls: ['./emp-add-edit.component.scss'],
+  selector: 'app-book-add-edit',
+  templateUrl: './book-add-edit.component.html',
+  styleUrls: ['./book-add-edit.component.scss'],
 })
 export class EmpAddEditComponent implements OnInit {
   empForm: FormGroup;

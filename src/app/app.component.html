@@ -1,9 +1,10 @@
 <mat-toolbar color="primary">
   <span>Book Inventory Management </span>
   <span class="example-spacer"></span>
-  <button mat-raised-button (click)="openAddEditEmpForm()">
+  <button mat-raised-button (click)="openAddEditEmpForm()" style="margin-right: 10px;">
     ADD Book
   </button>
+  <button mat-raised-button color="accent" (click)="exportToCSV()">Export to CSV</button>
 </mat-toolbar>
 
 

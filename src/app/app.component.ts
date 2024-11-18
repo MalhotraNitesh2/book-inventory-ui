@@ -80,15 +80,53 @@ export class AppComponent implements OnInit {
 
   openEditForm(data: any) {
     const dialogRef = this._dialog.open(EmpAddEditComponent, {
-      data, 
+      data,
     });
 
     dialogRef.afterClosed().subscribe({
       next: (val) => {
         if (val) {
-          this.getEmployeeList(); 
+          this.getEmployeeList();
         }
       },
     });
+  }
+
+  
+  exportToCSV() {
+    const csvData = this.convertToCSV(this.dataSource.data);
+    this.downloadCSV(csvData, 'employee_data.csv');
+  }
+
+
+  convertToCSV(data: any[]): string {
+    const header = ['Title', 'Author', 'Genre', 'Publication Date', 'ISBN']; // Column headers
+    const rows = data.map(item => [
+      item.title,
+      item.author,
+      item.genre,
+      item.publication_date,
+      item.isbn
+    ]);
+
+    // Combine header and rows
+    const csvContent = [header, ...rows].map(row => row.join(',')).join('\n');
+    return csvContent;
+  }
+
+  // Trigger download of the CSV file
+  downloadCSV(csvData: string, filename: string): void {
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      // Create a link to the file
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', filename);
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   }
 }
